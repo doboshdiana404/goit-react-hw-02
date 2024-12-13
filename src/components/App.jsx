@@ -1,12 +1,12 @@
-import "./App.css";
-import Feedback from "./Feedback/Feedback.jsx";
-import Options from "./Options/Options.jsx";
-import Description from "./Description/Description.jsx";
-import Notification from "./Notification/Notification.jsx";
-import { useState, useEffect } from "react";
+import './App.css';
+import Feedback from './Feedback/Feedback.jsx';
+import Options from './Options/Options.jsx';
+import Description from './Description/Description.jsx';
+import Notification from './Notification/Notification.jsx';
+import { useState, useEffect } from 'react';
 function App() {
   const [count, setCount] = useState(() => {
-    const savedData = JSON.parse(localStorage.getItem("count"));
+    const savedData = JSON.parse(localStorage.getItem('count'));
     if (!savedData?.length) {
       return savedData;
     }
@@ -17,11 +17,11 @@ function App() {
     };
   });
   useEffect(() => {
-    localStorage.setItem("count", JSON.stringify(count));
+    localStorage.setItem('count', JSON.stringify(count));
   }, [count]);
 
-  const updateFeedback = (feedbackType) => {
-    setCount((prev) => ({ ...prev, [feedbackType]: prev[feedbackType] + 1 }));
+  const updateFeedback = feedbackType => {
+    setCount(prev => ({ ...prev, [feedbackType]: prev[feedbackType] + 1 }));
   };
   const totalFeedback = count.good + count.neutral + count.bad;
   const positiveFeedback = Math.round((count.good / totalFeedback) * 100);
