@@ -6,9 +6,9 @@ import Notification from './Notification/Notification.jsx';
 import { useState, useEffect } from 'react';
 function App() {
   const [count, setCount] = useState(() => {
-    const savedData = JSON.parse(localStorage.getItem('count'));
-    if (!savedData?.length) {
-      return savedData;
+    const savedData = localStorage.getItem('count');
+    if (savedData) {
+      return JSON.parse(savedData);
     }
     return {
       good: 0,
@@ -19,7 +19,6 @@ function App() {
   useEffect(() => {
     localStorage.setItem('count', JSON.stringify(count));
   }, [count]);
-
   const updateFeedback = feedbackType => {
     setCount(prev => ({ ...prev, [feedbackType]: prev[feedbackType] + 1 }));
   };
